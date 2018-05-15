@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="col">
+    <p class="logo"><i class="fas fa-comments"></i></p>
+    <h3>Sign Up to Sealcode Messenger</h3>
+    <form #signUpForm="ngForm">
+      <label>Username</label>
+      <p><input class="form-control" type="text" name="username" required
+                ([ngModel])="signUpData.username"/></p>
+      <label>Password</label>
+      <p><input class="form-control" type="text" name="password" required
+                ([ngModel])="signUpData.password"/></p>
+      <label>Email</label>
+      <p><input class="form-control" type="email" name="email" required
+                ([ngModel])="signUpData.email"/></p>
+      <button class="btn btn-primary" (click)="submitSignUp($event)">Sign Up</button>
+    </form>
+  </div>
+</div>
