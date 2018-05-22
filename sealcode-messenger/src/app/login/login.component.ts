@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from "rxjs/index";
+import { HTTPService } from "../http.service";
 
 @Component({
   selector: 'app-login',
@@ -7,16 +9,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  constructor(private httpService: HTTPService) {  }
+
   private userData: Object = {
     login: '',
     password:''
   };
 
-  submit(): void{
-    console.log(this.userData);
-  }
+  private users: Object;
 
-  constructor() { }
+  private subscriptions: Array<Subscription> = [];
+
+  //MOCK VALIDATION
+
+  async getData(event, body){
+    let promise = new Promise((resolve, reject) => {
+      this.subscriptions.push(
+        this.httpService.getData().subscribe(
+          data => { this.users = data; resolve();},
+          error => { alert('Oops!'); reject(); }
+        )
+      );
+    }).then(() => {
+      let username = body.username;
+      let password = body.password;
+      Object.keys(this.users).map(key => {
+        if(username === this.users[key].username && password === this.users[key].password) {
+          localStorage.setItem('isLogged', "someFancyHash");
+        }
+      });
+      if(!localStorage.getItem("isLogged"))
+        alert('Error!');
+    });
+  }
 
   ngOnInit() {
   }
