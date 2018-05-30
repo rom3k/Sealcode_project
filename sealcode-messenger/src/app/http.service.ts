@@ -8,9 +8,5 @@ import { Observable } from 'rxjs/index';
 export class HTTPService {
 
   private url: String = 'http://localhost:3000';
-  constructor(private httpClient: HttpClient) { }
-
-  getData(): Observable<Object> {
-    return this.httpClient.get(`${this.url}/users`);
-  }
+  constructor() { }
 }
