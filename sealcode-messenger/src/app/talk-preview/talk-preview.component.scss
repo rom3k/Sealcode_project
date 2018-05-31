@@ -1,0 +1,16 @@
+//Color palette
+$sealcode: #674370;
+
+.previewBlock{
+
+    border: .5px solid #000000;
+
+    p{
+        margin:0;
+        padding:0;
+    }
+
+    &:hover{
+        background-color:#e1e1e1;
+    }
+}

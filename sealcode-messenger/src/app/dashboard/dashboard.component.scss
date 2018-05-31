@@ -1,0 +1,89 @@
+//Color palette:
+$white: #ffffff;
+$sealcode: #674370;
+
+//Mixins
+
+//Basic center mixin
+@mixin flex-center($aligment){
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: $aligment;
+}
+
+.wrapper{
+    width:100vw;
+}
+
+header{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    height: 10vh;
+    background-color:$white;
+
+    h1{
+        font-size:25px;
+        margin:auto;
+    }
+
+    nav{
+
+        ul{
+            display:flex;
+            justify-content: space-around;
+            list-style: none;
+        }
+    }
+}
+
+main{
+    height:85vh;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+
+    section{
+        @include flex-center(column);
+
+        .chatWindow{
+            height:95%;
+            width:100%;
+            overflow: scroll;
+            padding:0;
+        }
+        .input{
+            width:85%;
+            display:inline-block;
+        }
+        .sendBtn{
+            width:15%;
+            text-align:center;
+        }
+
+        .roomName{
+            background-color:$sealcode;
+            color:$white;
+        }
+    }
+
+
+    aside{
+        .iconborder{
+            border: 2px solid $sealcode;
+            box-sizing: border-box;
+            text-align: center;
+            padding:5px;
+        }
+        ul{
+            list-style:none;
+        }
+    }
+}
+
+footer{
+    background-color:$sealcode;
+    height:5vh;
+    color:$white;
+    display:flex;
+    align-items: center;
+}
