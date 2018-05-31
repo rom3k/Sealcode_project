@@ -1,3 +1,32 @@
-<p>
-  Welcome Sealcode Messenger!
-</p>
+<div class="wrapper">
+<header>
+  <h1>Welcome, <span style="color:#674370;">{{username}}</span></h1>
+  <nav>
+    <ul>
+      <li class="settingsOption"><i class="fas fa-wrench"></i> Settings</li>
+      <li class="logoutOption"><i class="fas fa-sign-out-alt"></i> Log Out</li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <section>
+    <div id="chat" class="chatWindow form-control">
+      <div class="roomName">Currently talking to: <span style="color:#adff2f;">{{room}}</span></div>
+    </div>
+    <div style="width:100%;">
+    <input type="text" name="input" id="input" class="input form-control">
+    <button class="sendBtn btn btn-primary">Send</button>
+    </div>
+  </section>
+  <aside>
+      <div class="iconborder">
+          <i class="fas fa-user"></i>
+      </div>
+    <ul>
+      <li><app-talk-preview></app-talk-preview></li>
+      <li><app-talk-preview></app-talk-preview></li>
+    </ul>
+  </aside>
+</main>
+<footer>Sealcode Messenger</footer>
+</div>
