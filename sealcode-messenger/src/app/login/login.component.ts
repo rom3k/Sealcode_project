@@ -16,9 +16,17 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  private users: Object;
+  private subscriptions: Array<Subscription> = [];
 
   ngOnInit() {
   }
 
+  sendData(form: Object) {
+    this.subscriptions.push(
+      this.httpService.postData(form).subscribe(
+        data => { console.log(data); },
+        error => { console.log(error); }
+      )
+    );
+  }
 }
