@@ -7,6 +7,10 @@ import { Observable } from 'rxjs/index';
 })
 export class HTTPService {
 
-  private url: String = 'http://localhost:3000';
-  constructor() { }
+  private url: String = 'http://localhost:6534';
+
+  constructor(private httpClient: HttpClient) { }
+  postData(body: Object): Observable<Object> {
+    return this.httpClient.post('http://localhost:6534/auth', body);
+  }
 }
