@@ -1,19 +1,58 @@
-const express = require('express');
-const app = express();
-const mongoDb = require('mongodb').MongoClient;
-const db = require('./database.js');
+var express = require("express");
+var cookieParser = require("cookie-parser");
+var bodyParser = require("body-parser");
+var expressValidator = require("express-validator");
+var session = require("express-session");
+var passport = require("passport");
+var mongo = require("mongodb");
+var mongoose = require("mongoose");
 
-app.use((req, res, next) => {
+var routes = require("./routes");
+
+//mongoose.connect("mongodb://localhost:27017/Sealcode");
+//var db = mongoose.connection;
+
+var app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
-})
-
-app.post("/auth", (req, res, next) => {
-  db.getData(req.body);
 });
 
+app.set(session({
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: true
+}));
 
-app.listen('6534', () => {
-  console.log("Listening on port 6534");
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+    var namespace = param.split('.'),
+    root = namespace.shift(),
+    formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param: formParam,
+      msg: msg,
+      value: value
+    }
+  }
+}));
+
+
+app.use('/', routes);
+
+app.listen(8080, () => {
+  console.log("Server listening on port 8080");
 });
+
