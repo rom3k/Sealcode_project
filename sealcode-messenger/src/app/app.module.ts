@@ -12,11 +12,14 @@ import { HTTPService } from './http.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TalkPreviewComponent } from './talk-preview/talk-preview.component';
 
+import { AuthGuardService } from './auth-guard.service';
+import { AuthService } from './auth.service';
+
 const appRoutes: Routes = [
   {path: '', component: LoginComponent },
   {path: 'login', component: LoginComponent },
   {path: 'sign-up', component: SignUpComponent },
-  {path: 'dashboard', component: DashboardComponent },
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService]},
   {path: '**', component: LoginComponent },
 ];
 
@@ -38,7 +41,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
   ],
-  providers: [HTTPService],
+  providers: [HTTPService, AuthGuardService, AuthService],
   bootstrap: [AppComponent]
 })
 
